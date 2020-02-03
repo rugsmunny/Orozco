@@ -9,6 +9,6 @@ package Employees;
  *
  * @author karim
  */
-public class Managers {
+public class Whipers {
     
 }
