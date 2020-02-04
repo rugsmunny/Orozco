@@ -14,19 +14,24 @@ package Employees;
 public abstract class Employee {
     public String name;
     public int salary;
-    public static enum genders{
-        Man,Woman,Nonbinary
+
+    public enum genders{
+        man,woman,nonbinary
     }
-    public static enum positions{
-        Worker, localManager
+    public enum positions{
+        worker, localManager
     }
     public genders gender; 
     public int age;
     public int id;
-    
-    
+    public int monthsInDuty;
     public positions position;
+    
 
+    public String getInfo(){
+        return String.format("Id: %d Name: %s Salary: %d Age: %d Gender: %s Months in duty: %d",id,name, salary,age,gender,monthsInDuty);
+    }
+    
     public int getId() {
         return id;
     }
@@ -34,6 +39,18 @@ public abstract class Employee {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getMonthsInDuty() {
+        return monthsInDuty;
+    }
+
+    public void setMonthsInDuty(int monthsInDuty) {
+        this.monthsInDuty = monthsInDuty;
+    }
+    
+    
+    
+
 
     public positions getPosition() {
         return position;
@@ -44,9 +61,6 @@ public abstract class Employee {
     }
     
     
-    public String getInfo(){
-        return String.format("Name: %s Salary: %d Age: %d Gender: %s",name, salary,age,gender);
-    }
     
     public String getName() {
         return name;
