@@ -9,6 +9,12 @@ package Employees;
  *
  * @author admusr
  */
-public class Economy {
-    
+public class Economy extends Employee{
+    public Economy(){
+        salary = 25000;
+        gender = genders.Man;
+        age = 50;
+        name = "göran";
+        System.out.println(getInfo());
+    }
 }

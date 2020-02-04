@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package orozco;
+import Employees.*;
 
 /**
  *
@@ -16,6 +17,8 @@ public class Orozco {
      */
     public static void main(String[] args) {
         System.out.println("hej");
+        Economy a;
+        a = new Economy();
     }
     
 }

@@ -9,6 +9,6 @@ package Employees;
  *
  * @author admusr
  */
-public class NetworkTechnician {
+public class NetworkTechnician extends Employee{
     
 }

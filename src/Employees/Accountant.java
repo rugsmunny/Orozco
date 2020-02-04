@@ -9,6 +9,6 @@ package Employees;
  *
  * @author admusr
  */
-public class Accountant {
+public class Accountant extends Employee{
     
 }
