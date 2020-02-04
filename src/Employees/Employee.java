@@ -14,16 +14,18 @@ package Employees;
 public abstract class Employee {
     public String name;
     public int salary;
+
     public enum genders{
         man,woman,nonbinary
     }
-    public enum position{
+    public enum positions{
         worker, localManager
     }
     public genders gender; 
     public int age;
     public int id;
     public int monthsInDuty;
+    public positions position;
     
 
     public String getInfo(){
@@ -48,7 +50,15 @@ public abstract class Employee {
     
     
     
-    
+
+
+    public positions getPosition() {
+        return position;
+    }
+
+    public void setPosition(positions position) {
+        this.position = position;
+    }
     
     
     
