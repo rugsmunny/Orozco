@@ -24,12 +24,12 @@ public abstract class Employee {
     public genders gender; 
     public int age;
     public int id;
-    public int monthsInDuty;
+    public int startDate;
     public positions position;
     
 
     public String getInfo(){
-        return String.format("Id: %d Name: %s Salary: %d Age: %d Gender: %s Months in duty: %d",id,name, salary,age,gender,monthsInDuty);
+        return String.format("Id: %d Name: %s Salary: %d Age: %d Gender: %s Months in duty: %d",id,name, salary,age,gender,startDate);
     }
     
     public int getId() {
@@ -40,18 +40,14 @@ public abstract class Employee {
         this.id = id;
     }
 
-    public int getMonthsInDuty() {
-        return monthsInDuty;
+    public int getStartDate() {
+        return startDate;
     }
 
-    public void setMonthsInDuty(int monthsInDuty) {
-        this.monthsInDuty = monthsInDuty;
+    public void setStartDate(int startDate) {
+        this.startDate = startDate;
     }
     
-    
-    
-
-
     public positions getPosition() {
         return position;
     }
@@ -59,8 +55,6 @@ public abstract class Employee {
     public void setPosition(positions position) {
         this.position = position;
     }
-    
-    
     
     public String getName() {
         return name;
@@ -92,6 +86,15 @@ public abstract class Employee {
 
     public void setAge(int age) {
         this.age = age;
+    }
+      public Employee(String name, int salary, genders gender, int age, int id, int startDate, positions position) {
+        this.name = name;
+        this.salary = salary;
+        this.gender = gender;
+        this.age = age;
+        this.id = id;
+        this.startDate = startDate;
+        this.position = position;
     }
     
     

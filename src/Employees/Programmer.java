@@ -11,5 +11,9 @@ package Employees;
  */
 
 public class Programmer extends Employee{
+
+    public Programmer(String name, int salary, genders gender, int age, int id, int startDate, positions position) {
+        super(name, salary, gender, age, id, startDate, position);
+    }
     
 }

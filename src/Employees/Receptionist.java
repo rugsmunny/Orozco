@@ -10,5 +10,9 @@ package Employees;
  * @author admusr
  */
 public class Receptionist extends Employee{
+
+    public Receptionist(String name, int salary, genders gender, int age, int id, int startDate, positions position) {
+        super(name, salary, gender, age, id, startDate, position);
+    }
     
 }
