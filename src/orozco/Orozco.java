@@ -23,7 +23,9 @@ public class Orozco {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int choice;
-        while (true) {
+        boolean running = true;
+        while(running){
+            while (true) {
 
             System.out.print("1. Add employee\n2. Select employee\n3. Statistics\n0. Exit\n\nChoice: ");
             
@@ -31,7 +33,8 @@ public class Orozco {
                 choice = Integer.parseInt(input.nextLine());
                 break;
             }catch(NumberFormatException e){
-                System.out.println("fel, försök igen " + e);
+                
+                System.out.println("\nEtt fel uppstod, försök igen. \n");
                 
             }
         }
@@ -39,13 +42,14 @@ public class Orozco {
             
             
             case 1:
-                
+//                Add employee
             case 2:
-                
+//                Select employee
             case 3:
-                
+//                Statistics
             case 0:
-                
+                running = false;
+                System.out.println("Program shut down.");
             default:
         }
 
@@ -92,6 +96,8 @@ public class Orozco {
                 
 
          */
+        }
+        
     }
 
 }
