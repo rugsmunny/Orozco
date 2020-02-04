@@ -7,8 +7,8 @@ package Employees;
 
 /**
  *
- * @author karim
+ * @author admusr
  */
-public class Employees {
+public class Accountant extends Employee{
     
 }
