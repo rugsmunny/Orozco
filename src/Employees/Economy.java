@@ -10,11 +10,13 @@ package Employees;
  * @author admusr
  */
 public class Economy extends Employee{
-    public Economy(){
+    public Economy(int Id,String Name ,genders Gender,int Age,int Salary){
         salary = 25000;
         gender = genders.Man;
         age = 50;
         name = "göran";
         System.out.println(getInfo());
     }
+
+ 
 }

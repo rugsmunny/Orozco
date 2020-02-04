@@ -14,6 +14,16 @@ package Employees;
 public abstract class Employee {
     public String name;
     public int salary;
+    public enum genders{
+        Man,Woman,Nonbinary
+    }
+    public genders gender; 
+    public int age;
+    public int id;
+    
+    
+    
+    
     
     public String getInfo(){
         return String.format("Name: %s Salary: %d Age: %d Gender: %s",name, salary,age,gender);
@@ -50,11 +60,7 @@ public abstract class Employee {
     public void setAge(int age) {
         this.age = age;
     }
-    public enum genders{
-        Man,Woman,Nonbinary
-    }
-    public genders gender; 
-    public int age;
+    
     
    
     
