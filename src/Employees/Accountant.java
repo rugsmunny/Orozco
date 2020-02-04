@@ -7,8 +7,8 @@ package Employees;
 
 /**
  *
- * @author karim
+ * @author admusr
  */
-public class Managers {
+public class Accountant {
     
 }
