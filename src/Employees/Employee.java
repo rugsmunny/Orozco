@@ -14,15 +14,34 @@ package Employees;
 public abstract class Employee {
     public String name;
     public int salary;
-    public enum genders{
+    public static enum genders{
         Man,Woman,Nonbinary
+    }
+    public static enum positions{
+        Worker, localManager
     }
     public genders gender; 
     public int age;
     public int id;
     
     
-    
+    public positions position;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public positions getPosition() {
+        return position;
+    }
+
+    public void setPosition(positions position) {
+        this.position = position;
+    }
     
     
     public String getInfo(){
