@@ -5,8 +5,7 @@
  */
 package orozco;
 
-import Employees.Employee;
-import Employees.Programmer;
+import Employees.*;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -35,13 +34,53 @@ public class Menus {
     }
 
     public static String questionAndInputString(String question, Scanner input) {
-        System.out.print(question);
-        return input.nextLine();
+        while (true){
+            System.out.print(question);
+            try{
+                return input.nextLine();
+            }
+            catch(Exception e){
+                System.out.println(e);
+            } 
+        }
     }
 
     public static int questionAndInputInt(String question, Scanner input) {
-        System.out.print(question);
-        return Integer.parseInt(input.nextLine());
+        while (true){
+            System.out.print(question);
+            try{
+                return Integer.parseInt(input.nextLine());
+            }
+            catch(Exception e){
+                System.out.println(e);
+            } 
+        }
+        
+        
+    }
+    
+    public static String checkForDuplicateId(String id){
+        int duplicates = 0;
+        String tempid = id; 
+        int index;
+        while (true){
+            index = 0;
+            for (Employee e : Orozco.employees){
+                index += 1;
+                if (e.id.equals(tempid)){
+                    
+                    tempid = id;
+                    duplicates += 1;
+                    tempid += duplicates;
+                    break;
+                }
+                if (index == Orozco.employees.size()){
+                    return tempid;
+                }
+                
+                
+            }
+        }
     }
 
     public static void addEmployee(Scanner input) {
@@ -52,70 +91,86 @@ public class Menus {
             question += i + 1 + ". " + Orozco.departments[i] + "\n";
         }
         question += "\n0. Back\n\nChoice: ";
+        String name = questionAndInputString("\nName: ", input);
+        
+        String lastName = questionAndInputString("\nLast Name:", input);
+        
+        int salary = questionAndInputInt("\nSalary: ", input);
+        
+        int sexChoice = choiceMethod("\nGender: \n1. Man\n2. Woman\n3. NonBinary\n\nAnswer: ", 3, input);
+        
+        Employee.genders gender = null;
+        switch (sexChoice) {
+            case 1:
+                gender = Employee.genders.man;
+            case 2:
+                gender = Employee.genders.woman;
+            case 3:
+                gender = Employee.genders.nonbinary;
+        }
+        
+   
+        
+        String id = checkForDuplicateId(name + lastName.substring(0, 2));
+        String birthDate = questionAndInputString("\nBirth date (YYYYMMDD)\n\n", input);
+        int startDate = questionAndInputInt("\nStart date (YYYYMMDD)\n\n: ", input);
+
+        Employee.positions position = null;
+        int positionChoice = questionAndInputInt("\nPosition:\n\n1. Worker.\n2. Local manager.\n\nType in your answer: ", input);
+        switch (positionChoice) {
+            case 1:
+                position = Employee.positions.worker;
+            case 2:
+                position = Employee.positions.localManager;
+
+        }
+
         choice = choiceMethod(question, Orozco.departments.length, input);
         switch (choice) {
             case 1:
-                String name = questionAndInputString("\nName: ", input);
-                int salary = questionAndInputInt("\nSalary: ", input);
-                int sexChoice = choiceMethod("\nGender: \n1. Man\n2. Woman\n3. NonBinary\n\nAnswer: ", 3, input);
-                Employee.genders gender = null;
-                switch (sexChoice) {
-                    case 1:
-                        gender = Employee.genders.man;
-                    case 2:
-                        gender = Employee.genders.woman;
-                    case 3:
-                        gender = Employee.genders.nonbinary;
-                }
-                int id = Orozco.employees.size();
-                
-                int date = questionAndInputInt("\nStart date (YYYYMMDD)\n\n: ", input);
-                
-                Employee.positions position = null;
-                int positionChoice = questionAndInputInt("\nPosition:\n\n1. Worker.\n2. Local manager.\n\nType in your answer: ", input);
-                switch (positionChoice) {
-                    case 1:
-                        position = Employee.positions.worker;
-                    case 2:
-                        position = Employee.positions.localManager;
-                    
-                }
+               
+                Orozco.employees.add(new Programmer(id,name,lastName, salary, gender, birthDate, startDate, position));
 
-                Employee programmer = new Programmer(name, salary, gender, 21, id, date, position);
-
-                Orozco.employees.add(programmer);
+                
                 System.out.println("Programmer account added");
+               
 
                 break;
-            /* case 2:
-             System.out.println("\nAccountant");
+            case 2:
+                Orozco.employees.add(new Accountant(id,name,lastName, salary, gender, birthDate, startDate, position));
+                break;
+
              case 3:
-             System.out.println("\nEconomy");
+                Orozco.employees.add(new Economy(id,name,lastName, salary, gender, birthDate, startDate, position));
+                break;
+
              case 4:
-             System.out.println("\nNetworkTechnician");
+                Orozco.employees.add(new NetworkTechnician(id,name,lastName, salary, gender, birthDate, startDate, position));
+                break;
+
              case 5:
-             System.out.println("\nManager");
+                Orozco.employees.add(new Manager(id,name,lastName, salary, gender, birthDate, startDate, position));
+                break;
+
              case 6:
-             System.out.println("\nReceptionist");*/
-            default:
+                Orozco.employees.add(new Receptionist(id,name,lastName, salary, gender, birthDate, startDate, position));
+                break;
 
         }
     }
 
     public static void selectEmployee(Scanner input) {
-        Employee programmer1 = new Programmer("Kalle", 55555, Employee.genders.man, 21, 0, 20200202, Employee.positions.localManager);
-        Employee programmer2 = new Programmer("Jalle", 55555, Employee.genders.man, 21, 1, 20200202, Employee.positions.localManager);
-        Employee programmer3 = new Programmer("Alle", 55555, Employee.genders.man, 21, 2, 20200202, Employee.positions.localManager);
-        Employee programmer4 = new Programmer("Malle", 55555, Employee.genders.man, 21, 3, 20200202, Employee.positions.localManager);
-        
-        Orozco.employees.add(programmer1);
-        Orozco.employees.add(programmer2);
-        Orozco.employees.add(programmer3);
-        Orozco.employees.add(programmer4);
-//        System.out.println(Orozco.employees);
+    
+        String employee;
+        int index = 0;
         for(Employee e : Orozco.employees){
-            System.out.println(e.name+e.salary);
+            System.out.println(String.format("%d. %s", index + 1,e.id));
+            index++; 
+            
         }
+        
+        employee = questionAndInputString("Type id or name: ", input);
+        
             
     }
 

@@ -29,6 +29,7 @@ public class Orozco {
 
         int choice;
         boolean running = true;
+        employees.add(new Programmer("KalleKa","Kalle","Karlsson", 10000, genders.man, "123", 190190, positions.localManager));
 
         while (running) {
 

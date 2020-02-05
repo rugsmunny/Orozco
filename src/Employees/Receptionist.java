@@ -11,8 +11,7 @@ package Employees;
  */
 public class Receptionist extends Employee{
 
-    public Receptionist(String name, int salary, genders gender, int age, int id, int startDate, positions position) {
-        super(name, salary, gender, age, id, startDate, position);
+    public Receptionist(String id, String name,String lastName, int salary, genders gender, String birthDate, int startDate, positions position) {
+        super(id, name,lastName, salary, gender, birthDate, startDate, position);
     }
-    
 }
