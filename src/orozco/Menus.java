@@ -34,6 +34,16 @@ public class Menus {
         }
     }
 
+    public static String questionAndInputString(String question, Scanner input) {
+        System.out.print(question);
+        return input.nextLine();
+    }
+
+    public static int questionAndInputInt(String question, Scanner input) {
+        System.out.print(question);
+        return Integer.parseInt(input.nextLine());
+    }
+
     public static void addEmployee(Scanner input) {
 
         String question = "\n";
@@ -45,50 +55,72 @@ public class Menus {
         choice = choiceMethod(question, Orozco.departments.length, input);
         switch (choice) {
             case 1:
-                System.out.print("\nName: ");
-                String name = input.nextLine();
-                System.out.print("\nSalary: ");
-                int salary = input.nextInt();
-                System.out.println("\nGender: Man - Woman - NonBinary\n\nAnswer: ");
-                String sex = input.nextLine().toLowerCase();
-                Employee.genders gender = Employee.genders.valueOf(sex);
+                String name = questionAndInputString("\nName: ", input);
+                int salary = questionAndInputInt("\nSalary: ", input);
+                int sexChoice = choiceMethod("\nGender: \n1. Man\n2. Woman\n3. NonBinary\n\nAnswer: ", 3, input);
+                Employee.genders gender = null;
+                switch (sexChoice) {
+                    case 1:
+                        gender = Employee.genders.man;
+                    case 2:
+                        gender = Employee.genders.woman;
+                    case 3:
+                        gender = Employee.genders.nonbinary;
+                }
                 int id = Orozco.employees.size();
-                System.out.print("\nStart date (YYYYMMDD)\n\n: ");
-                int date = input.nextInt();
-                System.out.print("\nPosition:\n\n1. Worker.\n2. Local manager.\n\nType in your answer: ");
-                Employee.positions position = Employee.positions.valueOf(input.nextLine().toLowerCase());
                 
+                int date = questionAndInputInt("\nStart date (YYYYMMDD)\n\n: ", input);
+                
+                Employee.positions position = null;
+                int positionChoice = questionAndInputInt("\nPosition:\n\n1. Worker.\n2. Local manager.\n\nType in your answer: ", input);
+                switch (positionChoice) {
+                    case 1:
+                        position = Employee.positions.worker;
+                    case 2:
+                        position = Employee.positions.localManager;
+                    
+                }
+
                 Employee programmer = new Programmer(name, salary, gender, 21, id, date, position);
-                
+
                 Orozco.employees.add(programmer);
-                
-                
-                
+                System.out.println("Programmer account added");
+
                 break;
-           /* case 2:
-                System.out.println("\nAccountant");
-            case 3:
-                System.out.println("\nEconomy");
-            case 4:
-                System.out.println("\nNetworkTechnician");
-            case 5:
-                System.out.println("\nManager");
-            case 6:
-                System.out.println("\nReceptionist");*/
+            /* case 2:
+             System.out.println("\nAccountant");
+             case 3:
+             System.out.println("\nEconomy");
+             case 4:
+             System.out.println("\nNetworkTechnician");
+             case 5:
+             System.out.println("\nManager");
+             case 6:
+             System.out.println("\nReceptionist");*/
             default:
-                
 
         }
     }
 
     public static void selectEmployee(Scanner input) {
-        System.out.println("");
-
+        Employee programmer1 = new Programmer("Kalle", 55555, Employee.genders.man, 21, 0, 20200202, Employee.positions.localManager);
+        Employee programmer2 = new Programmer("Jalle", 55555, Employee.genders.man, 21, 1, 20200202, Employee.positions.localManager);
+        Employee programmer3 = new Programmer("Alle", 55555, Employee.genders.man, 21, 2, 20200202, Employee.positions.localManager);
+        Employee programmer4 = new Programmer("Malle", 55555, Employee.genders.man, 21, 3, 20200202, Employee.positions.localManager);
+        
+        Orozco.employees.add(programmer1);
+        Orozco.employees.add(programmer2);
+        Orozco.employees.add(programmer3);
+        Orozco.employees.add(programmer4);
+//        System.out.println(Orozco.employees);
+        for(Employee e : Orozco.employees){
+            System.out.println(e.name+e.salary);
+        }
+            
     }
 
     public static void statistics(Scanner input) {
 
     }
-    
-    
+
 }

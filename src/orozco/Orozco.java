@@ -39,8 +39,7 @@ public class Orozco {
                     Menus.addEmployee(input);
                     break;
                 case 2:
-                    System.out.println(employees);
-                    //Menus.selectEmployee(input);
+                    Menus.selectEmployee(input);
                     break;
                 case 3:
                     Menus.statistics(input);
