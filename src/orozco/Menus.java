@@ -14,16 +14,34 @@ import java.util.Scanner;
  * @author admusr
  */
 public class Menus {
+    
+    
+    
+    public static String listChoices(String[] choices){
+        String question = "";
+        for (int i = 0; i < choices.length; i++) {
+            question += "\n" + (i +1) +". " +choices[i];
+                
+        }
+        return question;
+    }
 
-    public static int choiceMethod(String question, int numberOfChoices, Scanner input) {
+    public static int choiceMethod(String[] choices, Scanner input) {
         int choice;
         while (true) {
+            
+            String question = "";
+            
+            question = listChoices(choices);
+            
+            
 
+            question += "\n\nchoice:";
             System.out.print(question);
 
             try {
                 choice = Integer.parseInt(input.nextLine());
-                if (choice == 0 || choice <= numberOfChoices) {
+                if (choice == 0 || choice <= choices.length) {
                     return choice;
                 }
             } catch (NumberFormatException e) {
@@ -85,19 +103,16 @@ public class Menus {
 
     public static void addEmployee(Scanner input) {
 
-        String question = "\n";
+
         int choice;
-        for (int i = 0; i < Orozco.departments.length; i++) {
-            question += i + 1 + ". " + Orozco.departments[i] + "\n";
-        }
-        question += "\n0. Back\n\nChoice: ";
+
         String name = questionAndInputString("\nName: ", input);
         
         String lastName = questionAndInputString("\nLast Name:", input);
         
         int salary = questionAndInputInt("\nSalary: ", input);
         
-        int sexChoice = choiceMethod("\nGender: \n1. Man\n2. Woman\n3. NonBinary\n\nAnswer: ", 3, input);
+        int sexChoice = choiceMethod(new String[] {"Man","Woman","NonBinary"}, input);
         
         Employee.genders gender = null;
         switch (sexChoice) {
@@ -116,7 +131,7 @@ public class Menus {
         int startDate = questionAndInputInt("\nStart date (YYYYMMDD)\n\n: ", input);
 
         Employee.positions position = null;
-        int positionChoice = questionAndInputInt("\nPosition:\n\n1. Worker.\n2. Local manager.\n\nType in your answer: ", input);
+        int positionChoice = choiceMethod(new String[] {"Worker", "Local manager"}, input);
         switch (positionChoice) {
             case 1:
                 position = Employee.positions.worker;
@@ -125,7 +140,7 @@ public class Menus {
 
         }
 
-        choice = choiceMethod(question, Orozco.departments.length, input);
+        choice = choiceMethod(Orozco.departments, input);
         switch (choice) {
             case 1:
                

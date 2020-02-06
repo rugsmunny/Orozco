@@ -33,7 +33,7 @@ public class Orozco {
 
         while (running) {
 
-            choice = Menus.choiceMethod("\n1. Add employee\n2. Select employee\n3. Statistics\n0. Exit\n\nChoice: ", 3, input);
+            choice = Menus.choiceMethod(new String[] {"Add employee", "Select employee", "Statistics"}, input);
             switch (choice) {
 
                 case 1:
