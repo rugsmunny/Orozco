@@ -39,6 +39,7 @@ public class Orozco {
                     Menus.addEmployee(input);
                     break;
                 case 2:
+                    System.out.println("funka");
                     Menus.selectEmployee(input);
                     break;
                 case 3:

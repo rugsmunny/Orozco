@@ -9,6 +9,7 @@ import Employees.Employee;
 import Employees.Programmer;
 import java.util.Calendar;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 /**
  *
@@ -113,9 +114,10 @@ public class Menus {
         Orozco.employees.add(programmer3);
         Orozco.employees.add(programmer4);
 //        System.out.println(Orozco.employees);
-        for(Employee e : Orozco.employees){
-            System.out.println(e.name+e.salary);
-        }
+        Orozco.employees.stream().forEach((Employee e) -> {
+            System.out.println(e.getInfo());
+            
+        });
             
     }
 
