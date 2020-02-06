@@ -53,7 +53,7 @@ public class Menus {
 
     public static String questionAndInputString(String question, Scanner input) {
         while (true){
-            System.out.print(question);
+            System.out.print("\n"+question+": ");
             try{
                 return input.nextLine();
             }
@@ -65,7 +65,7 @@ public class Menus {
 
     public static int questionAndInputInt(String question, Scanner input) {
         while (true){
-            System.out.print(question);
+            System.out.print("\n"+question+": ");
             try{
                 return Integer.parseInt(input.nextLine());
             }
@@ -106,32 +106,33 @@ public class Menus {
 
         int choice;
 
-        String name = questionAndInputString("\nName: ", input);
+        String name = questionAndInputString("Name", input);
         
-        String lastName = questionAndInputString("\nLast Name:", input);
+        String lastName = questionAndInputString("Last Name", input);
         
-        int salary = questionAndInputInt("\nSalary: ", input);
-        
-        int sexChoice = choiceMethod(new String[] {"Man","Woman","NonBinary"}, input);
-        
+        int salary = questionAndInputInt("Salary", input);
         Employee.genders gender = null;
-        switch (sexChoice) {
+   
+        switch (choiceMethod(new String[] {"Man","Woman","NonBinary"}, input)) {
             case 1:
                 gender = Employee.genders.man;
+                break;
             case 2:
                 gender = Employee.genders.woman;
+                break;
             case 3:
                 gender = Employee.genders.nonbinary;
+                break;
         }
         
    
         
-        String id = checkForDuplicateId(name + lastName.substring(0, 2));
-        String birthDate = questionAndInputString("\nBirth date (YYYYMMDD)\n\n", input);
-        int startDate = questionAndInputInt("\nStart date (YYYYMMDD)\n\n: ", input);
+        String id = checkForDuplicateId((name + lastName.substring(0, 2)).toLowerCase());
+        String birthDate = questionAndInputString("Birth date (YYYYMMDD)", input);
+        int startDate = questionAndInputInt("\nStart date (YYYYMMDD)", input);
 
         Employee.positions position = null;
-        int positionChoice = choiceMethod(new String[] {"Worker", "Local manager"}, input);
+        int positionChoice = choiceMethod(new String[] {"Worker", "Local manager"} , input);
         switch (positionChoice) {
             case 1:
                 position = Employee.positions.worker;
@@ -183,8 +184,16 @@ public class Menus {
             index++; 
             
         }
-        
-        employee = questionAndInputString("Type id or name: ", input);
+        Employee selectedEmployee;
+        String id = questionAndInputString("Type id or name", input);
+        for (Employee e: Orozco.employees){
+            if (id.equals(e.id)){
+                selectedEmployee = e;
+                break;
+            }
+            
+            
+        }
         
             
     }
