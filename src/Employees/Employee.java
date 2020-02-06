@@ -59,7 +59,7 @@ public abstract class Employee {
     
 
     public String getInfo(){
-        return String.format("Id: %d Name: %s Salary: %d Birthdate: %s Gender: %s Months in duty: %d",id,name, salary,birthDate,gender,startDate);
+        return String.format("Id: %s Name: %s Salary: %d Birthdate: %s Gender: %s Months in duty: %d",id,name, salary,birthDate,gender,startDate);
     }
 
     public int getStartDate() {
