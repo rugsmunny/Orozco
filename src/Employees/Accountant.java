@@ -11,9 +11,10 @@ package Employees;
  */
 public class Accountant extends Employee{
 
-    public Accountant(String name, int salary, genders gender, int age, int id, int startDate, positions position) {
-        super(name, salary, gender, age, id, startDate, position);
+    public Accountant(String id, String name,String lastName, int salary, genders gender, String birthDate, int startDate, positions position) {
+        super(id, name,lastName, salary, gender, birthDate, startDate, position);
     }
+    
 
   
     

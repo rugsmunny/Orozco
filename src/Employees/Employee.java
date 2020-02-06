@@ -13,31 +13,53 @@ package Employees;
 
 public abstract class Employee {
     public String name;
+    public String lastName;
     public int salary;
+     
+    public genders gender; 
 
+    public String id;
+    public int startDate;
+    public String birthDate;
+    public positions position;
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    
     public enum genders{
         man,woman,nonbinary
     }
     public enum positions{
         worker, localManager
     }
-    public genders gender; 
-    public int age;
-    public int id;
-    public int startDate;
-    public positions position;
+   
     
 
     public String getInfo(){
-        return String.format("Id: %d Name: %s Salary: %d Age: %d Gender: %s Months in duty: %d",id,name, salary,age,gender,startDate);
-    }
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        return String.format("Id: %s Name: %s Salary: %d Birthdate: %s Gender: %s Months in duty: %d",id,name, salary,birthDate,gender,startDate);
     }
 
     public int getStartDate() {
@@ -80,21 +102,17 @@ public abstract class Employee {
         this.gender = gender;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-      public Employee(String name, int salary, genders gender, int age, int id, int startDate, positions position) {
+      public Employee(String id,String name,String lastName, int salary, genders gender, String birthDate, int startDate, positions position) {
         this.name = name;
+        this.lastName = lastName;
         this.salary = salary;
         this.gender = gender;
-        this.age = age;
+        this.birthDate = birthDate;
         this.id = id;
         this.startDate = startDate;
         this.position = position;
+        
+        
     }
     
     
