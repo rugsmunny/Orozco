@@ -207,11 +207,12 @@ public class Menus {
     }
 
     public static void selectEmployee(Scanner input) {
-<<<<<<< HEAD
-        Employee programmer1 = new Programmer("Kalle", 55555, Employee.genders.man, 21, 0, 20200202, Employee.positions.localManager);
-        Employee programmer2 = new Programmer("Jalle", 55555, Employee.genders.man, 21, 1, 20200202, Employee.positions.localManager);
-        Employee programmer3 = new Programmer("Alle", 55555, Employee.genders.man, 21, 2, 20200202, Employee.positions.localManager);
-        Employee programmer4 = new Programmer("Malle", 55555, Employee.genders.man, 21, 3, 20200202, Employee.positions.localManager);
+
+        Employee programmer1 = new Programmer("1", "Kalle" , "Jansson", 12000, Employee.genders.man, "750310", 20200202, Employee.positions.worker);
+        Employee programmer2 = new Programmer("2", "Janne" , "Jansson", 12000, Employee.genders.man, "550310", 20200202, Employee.positions.worker);
+        Employee programmer3 = new Programmer("3", "Damian" , "Jansson", 12000, Employee.genders.man, "650310", 20200202, Employee.positions.worker);
+        Employee programmer4 = new Programmer("4", "Dessie" , "Jansson", 12000, Employee.genders.man, "850310", 20200202, Employee.positions.worker);
+       
         
         Orozco.employees.add(programmer1);
         Orozco.employees.add(programmer2);
@@ -223,7 +224,6 @@ public class Menus {
             
         });
             
-=======
 
         String employee;
         int index = 0;
@@ -255,7 +255,7 @@ public class Menus {
             System.out.println("No employees exist");
         }
 
->>>>>>> 9ed711bce601d7236c7bdb99eaf23c8cb8bc2518
+
     }
 
     public static void statistics(Scanner input) {
