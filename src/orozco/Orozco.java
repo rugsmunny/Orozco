@@ -27,26 +27,38 @@ public class Orozco {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        int choice;
+        
         boolean running = true;
-        employees.add(new Programmer("KalleKa","Kalle","Karlsson", 10000, genders.man, "123", 190190, positions.localManager));
+        Employee programmer1 = new Programmer("1", "Kalle", "Jansson", 12000, Employee.genders.man, "750310", 20200202, Employee.positions.worker);
+        Employee programmer2 = new Programmer("2", "Janne", "Jansson", 15000, Employee.genders.woman, "550310", 20200202, Employee.positions.worker);
+        Employee programmer3 = new Programmer("3", "Damian", "Jansson", 25000, Employee.genders.man, "650310", 20200202, Employee.positions.worker);
+        Employee programmer4 = new Programmer("4", "Dessie", "Jansson", 50000, Employee.genders.nonbinary, "850310", 20200202, Employee.positions.worker);
+
+        Orozco.employees.add(programmer1);
+        Orozco.employees.add(programmer2);
+        Orozco.employees.add(programmer3);
+        Orozco.employees.add(programmer4);
 
         while (running) {
 
-            choice = Menus.choiceMethod(new String[] {"Add employee", "Select employee", "Statistics"}, input, true);
-            switch (choice) {
+           
+            switch (Menus.choiceMethod(new String[] {"Add employee", "Select employee", "Statistics"}, input, true)) {
 
                 case 1:
+                    Menus.clearScreen();
                     Menus.addEmployee(input);
                     break;
                 case 2:
-                    System.out.println("funka");
+                   Menus.clearScreen();
                     Menus.selectEmployee(input);
                     break;
                 case 3:
+                    Menus.clearScreen();
                     Menus.statistics(input);
+                    
                     break;
                 case 0:
+                    Menus.clearScreen();
                     System.out.println("\nProgram shut down.");
                     running = false;
                     break;
