@@ -36,14 +36,12 @@ public class Menus {
             question = listChoices(choices);
 
             if (back == true) {
-                if (choices[0].equals("Add employee")){
+                if (choices[0].equals("Add employee")) {
                     question += "\n0. Exit";
-                }
-                
-                else{
+                } else {
                     question += "\n0. Back";
                 }
-                
+
             }
 
             question += "\n\nChoice: ";
@@ -94,10 +92,10 @@ public class Menus {
         String tempid = id;
         if (Orozco.employees.isEmpty()) {
             return id;
-            
+
         }
         while (true) {
-            
+
             for (Employee e : Orozco.employees) {
                 System.out.println(id + " " + e.id);
                 if (e.id.equals(tempid)) {
@@ -213,16 +211,15 @@ public class Menus {
                 System.out.println("Receptionist account added");
                 break;
         }
-        
 
         chooseName(employee, input);
         chooseLastName(employee, input);
         chooseGender(employee, input);
-        choosePosition(employee,input);
+        choosePosition(employee, input);
         employee.setSalary(questionAndInputInt("Salary", input));
-    
-        employee.setId(checkForDuplicateId(employee.name + employee.lastName.substring(0, 2)).toLowerCase()); 
-        
+
+        employee.setId(checkForDuplicateId(employee.name + employee.lastName.substring(0, 2)).toLowerCase());
+
         employee.setBirthDate(questionAndInputString("Birth date (YYYYMMDD)", input));
         employee.setStartDate(questionAndInputInt("\nStart date (YYYYMMDD)", input));
         Orozco.employees.add(employee);
@@ -235,13 +232,47 @@ public class Menus {
 
             clearScreen();
 
-            switch (choiceMethod(new String[]{"Get all info", "Chanage Info", "Delete"}, input, true)) {
+            switch (choiceMethod(new String[]{"Get all info", "Change Info", "Delete"}, input, true)) {
                 case 1:
                     clearScreen();
                     System.out.println(e.getInfo());
                     break;
                 case 2:
                     clearScreen();
+                    boolean changing = true;
+                    while (changing) {
+                        switch (choiceMethod(new String[]{"Name", "Last Name", "Gender", "Salary", "Birthdate", "Startdate", "Position"}, input, true)) {
+                            case 1:
+                                chooseName(e, input);
+                                break;
+                            case 2:
+                                chooseLastName(e, input);
+                                break;
+
+                            case 3:
+                                chooseGender(e, input);
+
+                            case 4:
+                                e.setSalary(questionAndInputInt("Salary", input));
+                                break;
+
+                            case 5:
+                                choosePosition(e, input);
+
+                            case 6:
+                                e.setBirthDate(questionAndInputString("Birth date (YYYYMMDD)", input));
+                                break;
+
+                            case 7:
+                                e.setStartDate(questionAndInputInt("\nStart date (YYYYMMDD)", input));
+                                break;
+
+                            case 0:
+                                changing = false;
+
+                        }
+                    }
+
                     break;
                 case 3:
                     clearScreen();
@@ -261,40 +292,49 @@ public class Menus {
     }
 
     public static void selectEmployee(Scanner input) {
-        clearScreen();
-        String employee;
-        int index = 1;
-        for (Employee e : Orozco.employees) {
-            System.out.print(String.format("\n%d. %s", index, e.name));
-            index++;
+        boolean selectingEmployee = true;
+        while (selectingEmployee == true) {
+            clearScreen();
+            String employee;
+            int index = 1;
+            for (Employee e : Orozco.employees) {
+                System.out.print(String.format("\n%d. %s", index, e.name));
+                index++;
 
-        }
-        System.out.println("\n0. Back");
-        Employee selectedEmployee = null;
-        if (!Orozco.employees.isEmpty()) {
-            String id = questionAndInputString("\nType id or name", input);
-
-            try {
-
-                selectedEmployee = Orozco.employees.get(Integer.parseInt(id) - 1);
-            } catch (Exception ex) {
-                for (Employee e : Orozco.employees) {
-                    if (id.equals(e.id)) {
-                        selectedEmployee = e;
-                        break;
+            }
+            System.out.println("\n0. Back");
+            Employee selectedEmployee = null;
+            if (!Orozco.employees.isEmpty()) {
+                
+                String id = questionAndInputString("\nType id or name", input);
+                if (id.equals("0")){
+                    selectingEmployee = false;
+                }
+                try {
+                    
+                    selectedEmployee = Orozco.employees.get(Integer.parseInt(id) - 1);
+                } catch (Exception ex) {
+                    for (Employee e : Orozco.employees) {
+                        if (id.equals(e.id)) {
+                            selectedEmployee = e;
+                            break;
+                        }
                     }
                 }
+                if (selectedEmployee != null) {
+                    employeeOptions(selectedEmployee, input);
+                }
+            } else {
+                System.out.println("No employees exist");
             }
-            if (selectedEmployee != null) {
-                employeeOptions(selectedEmployee, input);
-            }
-        } else {
-            System.out.println("No employees exist");
+
         }
 
     }
 
-    public static void statistics(Scanner input) {
+
+
+public static void statistics(Scanner input) {
         clearScreen();
         boolean looping = true;
         while (looping == true) {

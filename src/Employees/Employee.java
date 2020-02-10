@@ -14,7 +14,6 @@ package Employees;
 public abstract class Employee {
     public String name;
     public String lastName;
-    public String testname;
     public int salary;
      
     public genders gender; 
@@ -60,7 +59,7 @@ public abstract class Employee {
     
 
     public String getInfo(){
-        return String.format("\nId: %s Name: %s Salary: %d Date of birth: %s Gender: %s Start date: %d",id,name, salary,birthDate,gender,startDate);
+        return String.format("\nId: %s\n Name: %s\n Last Name: %s\n Salary: %d\n Date of birth: %s\n Gender: %s\n Position: %s\n Start date: %d\n",id,name,lastName, salary,birthDate,gender,position,startDate);
     }
 
     public int getStartDate() {
