@@ -24,14 +24,21 @@ public class Menus {
         return question;
     }
 
-    public static int choiceMethod(String[] choices, Scanner input,boolean back) {
+    //public static String setName() {
+
+    //}
+
+    public static int choiceMethod(String[] choices, Scanner input, boolean back) {
         int choice;
         while (true) {
 
             String question = "";
 
             question = listChoices(choices);
-            question += "\n0. Back";
+            if (back == true) {
+                question += "\n0. Back";
+            }
+
             question += "\n\nchoice:";
             System.out.print(question);
 
@@ -92,11 +99,9 @@ public class Menus {
                     tempid += duplicates;
                     break;
                 }
-                if (index == Orozco.employees.size()) {
-                    return tempid;
-                }
 
             }
+            return tempid;
         }
     }
 
@@ -106,6 +111,9 @@ public class Menus {
         while (true) {
 
             name = questionAndInputString("Name", input);
+             if (name.length() < 2) {
+                continue;
+            }
             try {
                 Integer.parseInt(name);
             } catch (Exception e) {
@@ -113,10 +121,13 @@ public class Menus {
             }
         }
 
-        String lastName;
+        String lastName = "";
         while (true) {
 
             lastName = questionAndInputString("Last Name", input);
+            if (lastName.length() < 2) {
+                continue;
+            }
             try {
                 Integer.parseInt(lastName);
             } catch (Exception e) {
@@ -127,7 +138,7 @@ public class Menus {
         int salary = questionAndInputInt("Salary", input);
         Employee.genders gender = null;
 
-        switch (choiceMethod(new String[]{"Man", "Woman", "NonBinary"}, input,false)) {
+        switch (choiceMethod(new String[]{"Man", "Woman", "NonBinary"}, input, false)) {
             case 1:
                 gender = Employee.genders.man;
                 break;
@@ -144,7 +155,7 @@ public class Menus {
         int startDate = questionAndInputInt("\nStart date (YYYYMMDD)", input);
 
         Employee.positions position = null;
-        int positionChoice = choiceMethod(new String[]{"Worker", "Local manager"}, input,false);
+        int positionChoice = choiceMethod(new String[]{"Worker", "Local manager"}, input, false);
         switch (positionChoice) {
             case 1:
                 position = Employee.positions.worker;
@@ -153,7 +164,7 @@ public class Menus {
 
         }
 
-        switch (choiceMethod(Orozco.departments, input,false)) {
+        switch (choiceMethod(Orozco.departments, input, false)) {
             case 1:
 
                 Orozco.employees.add(new Programmer(id, name, lastName, salary, gender, birthDate, startDate, position));
@@ -188,7 +199,7 @@ public class Menus {
         boolean looping = true;
         while (looping) {
 
-            switch (choiceMethod(new String[]{"Get all info", "Chanage Info", "Delete"}, input,true)) {
+            switch (choiceMethod(new String[]{"Get all info", "Chanage Info", "Delete"}, input, true)) {
                 case 1:
                     System.out.println(e.getInfo());
                     break;
@@ -196,13 +207,11 @@ public class Menus {
                     break;
                 case 3:
                     System.out.println("Are you sure you want to delete this employee?");
-                    if(choiceMethod(new String[] {"Yes","No"}, input, false) == 1){
-                        
+                    if (choiceMethod(new String[]{"Yes", "No"}, input, false) == 1) {
+
                         Orozco.employees.remove(e);
                     }
-                    
-                    
-                    
+
                 case 0:
                     looping = false;
                     break;
@@ -239,8 +248,7 @@ public class Menus {
             if (selectedEmployee != null) {
                 employeeOptions(selectedEmployee, input);
             }
-        }
-        else{
+        } else {
             System.out.println("No employees exist");
         }
 
