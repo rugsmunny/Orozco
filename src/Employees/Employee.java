@@ -14,6 +14,7 @@ package Employees;
 public abstract class Employee {
     public String name;
     public String lastName;
+    public String testname;
     public int salary;
      
     public genders gender; 
@@ -102,15 +103,7 @@ public abstract class Employee {
         this.gender = gender;
     }
 
-      public Employee(String id,String name,String lastName, int salary, genders gender, String birthDate, int startDate, positions position) {
-        this.name = name;
-        this.lastName = lastName;
-        this.salary = salary;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.id = id;
-        this.startDate = startDate;
-        this.position = position;
+      public Employee() {
         
         
     }

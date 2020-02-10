@@ -29,15 +29,7 @@ public class Orozco {
 
         
         boolean running = true;
-        Employee programmer1 = new Programmer("1", "Kalle", "Jansson", 12000, Employee.genders.man, "750310", 20200202, Employee.positions.worker);
-        Employee programmer2 = new Programmer("2", "Janne", "Jansson", 15000, Employee.genders.woman, "550310", 20200202, Employee.positions.worker);
-        Employee programmer3 = new Programmer("3", "Damian", "Jansson", 25000, Employee.genders.man, "650310", 20200202, Employee.positions.worker);
-        Employee programmer4 = new Programmer("4", "Dessie", "Jansson", 50000, Employee.genders.nonbinary, "850310", 20200202, Employee.positions.worker);
 
-        Orozco.employees.add(programmer1);
-        Orozco.employees.add(programmer2);
-        Orozco.employees.add(programmer3);
-        Orozco.employees.add(programmer4);
 
         while (running) {
 
