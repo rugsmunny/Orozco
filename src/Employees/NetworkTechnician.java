@@ -11,8 +11,8 @@ package Employees;
  */
 public class NetworkTechnician extends Employee{
 
-    public NetworkTechnician(String id, String name,String lastName, int salary, genders gender, String birthDate, int startDate, positions position) {
-        super(id, name,lastName, salary, gender, birthDate, startDate, position);
+    public NetworkTechnician() {
+        
     }
     
     

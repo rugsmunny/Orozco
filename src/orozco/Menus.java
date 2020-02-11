@@ -25,6 +25,8 @@ public class Menus {
         return question;
     }
 
+    //public static String setName() {
+    //}
     public static int choiceMethod(String[] choices, Scanner input, boolean back) {
         int choice;
         while (true) {
@@ -32,8 +34,18 @@ public class Menus {
             String question = "";
 
             question = listChoices(choices);
-            question += "\n0. Back";
+
+            if (back == true) {
+                if (choices[0].equals("Add employee")) {
+                    question += "\n0. Exit";
+                } else {
+                    question += "\n0. Back";
+                }
+
+            }
+
             question += "\n\nChoice: ";
+
             System.out.print(question);
 
             try {
@@ -78,14 +90,14 @@ public class Menus {
     public static String checkForDuplicateId(String id) {
         int duplicates = 0;
         String tempid = id;
-        int index;
         if (Orozco.employees.isEmpty()) {
             return id;
+
         }
         while (true) {
-            index = 0;
+
             for (Employee e : Orozco.employees) {
-                index += 1;
+                System.out.println(id + " " + e.id);
                 if (e.id.equals(tempid)) {
 
                     tempid = id;
@@ -93,119 +105,174 @@ public class Menus {
                     tempid += duplicates;
                     break;
                 }
-                if (index == Orozco.employees.size()) {
-                    return tempid;
-                }
 
             }
+            return tempid;
         }
     }
 
-    public static void addEmployee(Scanner input) {
-
+    public static void chooseName(Employee employee, Scanner input) {
         String name;
         while (true) {
             clearScreen();
             name = questionAndInputString("Name", input);
+            if (name.length() < 2) {
+                continue;
+            }
             try {
                 Integer.parseInt(name);
             } catch (Exception e) {
+                employee.setName(name);
                 break;
             }
         }
+    }
 
+    public static void chooseLastName(Employee employee, Scanner input) {
         String lastName;
         while (true) {
             clearScreen();
             lastName = questionAndInputString("Last Name", input);
+            if (lastName.length() < 2) {
+                continue;
+            }
             try {
                 Integer.parseInt(lastName);
             } catch (Exception e) {
+                employee.setLastName(lastName);
                 break;
             }
         }
-        clearScreen();
-        int salary = questionAndInputInt("Salary", input);
-        Employee.genders gender = null;
-        clearScreen();
+    }
+
+    public static void chooseGender(Employee employee, Scanner input) {
         switch (choiceMethod(new String[]{"Man", "Woman", "NonBinary"}, input, false)) {
             case 1:
-                gender = Employee.genders.man;
+                employee.setGender(Employee.genders.man);
                 break;
             case 2:
-                gender = Employee.genders.woman;
+                employee.setGender(Employee.genders.woman);
                 break;
             case 3:
-                gender = Employee.genders.nonbinary;
+                employee.setGender(Employee.genders.nonbinary);
                 break;
         }
 
-        String id = checkForDuplicateId((name + lastName.substring(0, 2)).toLowerCase());
-        String birthDate = questionAndInputString("Birth date (YYYYMMDD)", input);
-        int startDate = questionAndInputInt("\nStart date (YYYYMMDD)", input);
-        clearScreen();
-        Employee.positions position = null;
-        int positionChoice = choiceMethod(new String[]{"Worker", "Local manager"}, input, false);
-        switch (positionChoice) {
+    }
+
+    public static void choosePosition(Employee employee, Scanner input) {
+        switch (choiceMethod(new String[]{"Worker", "Local manager"}, input, false)) {
             case 1:
-                position = Employee.positions.worker;
+                employee.setPosition(Employee.positions.worker);
+                break;
             case 2:
-                position = Employee.positions.localManager;
-
+                employee.setPosition(Employee.positions.localManager);
+                break;
         }
+    }
 
+    public static void addEmployee(Scanner input) {
+        Employee employee = null;
         switch (choiceMethod(Orozco.departments, input, false)) {
             case 1:
                 clearScreen();
-                Orozco.employees.add(new Programmer(id, name, lastName, salary, gender, birthDate, startDate, position));
+                employee = new Programmer();
 
                 System.out.println("Programmer account added");
 
                 break;
             case 2:
                 clearScreen();
-                Orozco.employees.add(new Accountant(id, name, lastName, salary, gender, birthDate, startDate, position));
+                employee = new Accountant();
                 System.out.println("Accountant account added");
                 break;
 
             case 3:
                 clearScreen();
-                Orozco.employees.add(new Economy(id, name, lastName, salary, gender, birthDate, startDate, position));
+                employee = new Economy();
                 System.out.println("Economy account added");
                 break;
 
             case 4:
                 clearScreen();
-                Orozco.employees.add(new NetworkTechnician(id, name, lastName, salary, gender, birthDate, startDate, position));
+                employee = new NetworkTechnician();
                 System.out.println("NetworkTechnician account added");
                 break;
 
             case 5:
                 clearScreen();
-                Orozco.employees.add(new Manager(id, name, lastName, salary, gender, birthDate, startDate, position));
+                employee = new Manager();
                 System.out.println("Manager account added");
                 break;
 
             case 6:
                 clearScreen();
-                Orozco.employees.add(new Receptionist(id, name, lastName, salary, gender, birthDate, startDate, position));
+                employee = new Receptionist();
                 System.out.println("Receptionist account added");
                 break;
-
         }
+
+        chooseName(employee, input);
+        chooseLastName(employee, input);
+        chooseGender(employee, input);
+        choosePosition(employee, input);
+        employee.setSalary(questionAndInputInt("Salary", input));
+
+        employee.setId(checkForDuplicateId(employee.name + employee.lastName.substring(0, 2)).toLowerCase());
+
+        employee.setBirthDate(questionAndInputString("Birth date (YYYYMMDD)", input));
+        employee.setStartDate(questionAndInputInt("\nStart date (YYYYMMDD)", input));
+        Orozco.employees.add(employee);
+
     }
 
     public static void employeeOptions(Employee e, Scanner input) {
         boolean looping = true;
         while (looping) {
+
             clearScreen();
-            switch (choiceMethod(new String[]{"Get all info", "Chanage Info", "Delete"}, input, true)) {
+
+            switch (choiceMethod(new String[]{"Get all info", "Change Info", "Delete"}, input, true)) {
                 case 1:
                     clearScreen();
                     System.out.println(e.getInfo());
                     break;
                 case 2:
                     clearScreen();
+                    boolean changing = true;
+                    while (changing) {
+                        switch (choiceMethod(new String[]{"Name", "Last Name", "Gender", "Salary", "Birthdate", "Startdate", "Position"}, input, true)) {
+                            case 1:
+                                chooseName(e, input);
+                                break;
+                            case 2:
+                                chooseLastName(e, input);
+                                break;
+
+                            case 3:
+                                chooseGender(e, input);
+
+                            case 4:
+                                e.setSalary(questionAndInputInt("Salary", input));
+                                break;
+
+                            case 5:
+                                choosePosition(e, input);
+
+                            case 6:
+                                e.setBirthDate(questionAndInputString("Birth date (YYYYMMDD)", input));
+                                break;
+
+                            case 7:
+                                e.setStartDate(questionAndInputInt("\nStart date (YYYYMMDD)", input));
+                                break;
+
+                            case 0:
+                                changing = false;
+
+                        }
+                    }
+
                     break;
                 case 3:
                     clearScreen();
@@ -225,89 +292,102 @@ public class Menus {
     }
 
     public static void selectEmployee(Scanner input) {
-clearScreen();
-        String employee;
-        int index = 1;
-        for (Employee e : Orozco.employees) {
-            System.out.print(String.format("\n%d. %s", index, e.name));
-            index++;
+        boolean selectingEmployee = true;
+        while (selectingEmployee == true) {
+            clearScreen();
+            String employee;
+            int index = 1;
+            for (Employee e : Orozco.employees) {
+                System.out.print(String.format("\n%d. %s", index, e.name));
+                index++;
 
-        }
-        Employee selectedEmployee = null;
-        if (!Orozco.employees.isEmpty()) {
-            String id = questionAndInputString("\nType id or name", input);
-
-            try {
-
-                selectedEmployee = Orozco.employees.get(Integer.parseInt(id) - 1);
-            } catch (Exception ex) {
-                for (Employee e : Orozco.employees) {
-                    if (id.equals(e.id)) {
-                        selectedEmployee = e;
-                        break;
+            }
+            System.out.println("\n0. Back");
+            Employee selectedEmployee = null;
+            if (!Orozco.employees.isEmpty()) {
+                
+                String id = questionAndInputString("\nType id or name", input);
+                if (id.equals("0")){
+                    selectingEmployee = false;
+                }
+                try {
+                    
+                    selectedEmployee = Orozco.employees.get(Integer.parseInt(id) - 1);
+                } catch (Exception ex) {
+                    for (Employee e : Orozco.employees) {
+                        if (id.equals(e.id)) {
+                            selectedEmployee = e;
+                            break;
+                        }
                     }
                 }
+                if (selectedEmployee != null) {
+                    employeeOptions(selectedEmployee, input);
+                }
+            } else {
+                System.out.println("No employees exist");
             }
-            if (selectedEmployee != null) {
-                employeeOptions(selectedEmployee, input);
-            }
-        } else {
-            System.out.println("No employees exist");
+
         }
 
     }
 
-    public static void statistics(Scanner input) {
-clearScreen();
-        switch (Menus.choiceMethod(new String[]{"Gender", "Wages"}, input, true)) {
 
-            case 1:
-clearScreen();
-                getGenderCount(Menus.choiceMethod(new String[]{"Men", "Women", "Non Binary"}, input, true));
-                break;
-            case 2:
-clearScreen();
-                getSalary(Menus.choiceMethod(new String[]{"Highest salary", "Lowest salary", "Average salary"}, input, true));
-                break;
-            case 3:
-                break;
+
+public static void statistics(Scanner input) {
+        clearScreen();
+        boolean looping = true;
+        while (looping == true) {
+            switch (Menus.choiceMethod(new String[]{"Gender", "Wages"}, input, true)) {
+
+                case 1:
+                    clearScreen();
+                    //getGenderCount(Menus.choiceMethod(new String[]{"Men", "Women", "Non Binary"}, input, true));
+                    getGenderCount();
+
+                    break;
+                case 2:
+                    clearScreen();
+                    getSalary(Menus.choiceMethod(new String[]{"Highest salary", "Lowest salary", "Average salary"}, input, true));
+                    break;
+                case 0:
+                    looping = false;
+            }
         }
+
     }
 
 //    public static int getGenderStats(){
 //        Orozco.employees.stream().collect(Collector.)
 //    }
-    public static void getGenderCount(int genderChoice) {
+    public static void getGenderCount() {
 
         Employee.genders gender = null;
         String genDer = null;
-        switch (genderChoice) {
-            case 1:
-                gender = Employee.genders.man;
-                genDer = "men";
-                break;
-            case 2:
-                gender = Employee.genders.woman;
-                genDer = "women";
-                break;
-            case 3:
-                gender = Employee.genders.nonbinary;
-                genDer = "nonbinaries";
-                break;
-        }
 
-        int num = 0;
+        int men = 0;
+        int women = 0;
+        int nonbinary = 0;
+
         for (Employee e : Orozco.employees) {
-
-            if (e.gender.equals(gender)) {
-
-                num += 1;
-
+            if (e.gender.equals(Employee.genders.man)) {
+                men++;
             }
-
+            if (e.gender.equals(Employee.genders.woman)) {
+                women++;
+            }
+            if (e.gender.equals(Employee.genders.nonbinary)) {
+                nonbinary++;
+            }
         }
-        clearScreen();
-        System.out.println("Total number of " + genDer + " is " + num);
+
+        int total = women + men + nonbinary;
+
+        float menpercent = ((float) men / (float) total) * 100;
+        float womenpercent = ((float) women / (float) total) * 100;
+        float nonbinarypercent = ((float) nonbinary / (float) total) * 100;
+
+        System.out.println(String.format("Number of men is: %d(%.1f%%)\nNumber of women is: %d(%.1f%%)\nNumber of nonbinary is: %d(%.1f%%)", men, menpercent, women, womenpercent, nonbinary, nonbinarypercent));
 
     }
 

@@ -11,8 +11,7 @@ package Employees;
  */
 public class Economy extends Employee{
 
-    public Economy(String id, String name,String lastName, int salary, genders gender, String birthDate, int startDate, positions position) {
-        super(id, name,lastName, salary, gender, birthDate, startDate, position);
+    public Economy() {
     }
     
 

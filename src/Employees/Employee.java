@@ -59,7 +59,7 @@ public abstract class Employee {
     
 
     public String getInfo(){
-        return String.format("\nId: %s Name: %s Salary: %d Date of birth: %s Gender: %s Start date: %d",id,name, salary,birthDate,gender,startDate);
+        return String.format("\nId: %s\n Name: %s\n Last Name: %s\n Salary: %d\n Date of birth: %s\n Gender: %s\n Position: %s\n Start date: %d\n",id,name,lastName, salary,birthDate,gender,position,startDate);
     }
 
     public int getStartDate() {
@@ -102,15 +102,7 @@ public abstract class Employee {
         this.gender = gender;
     }
 
-      public Employee(String id,String name,String lastName, int salary, genders gender, String birthDate, int startDate, positions position) {
-        this.name = name;
-        this.lastName = lastName;
-        this.salary = salary;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.id = id;
-        this.startDate = startDate;
-        this.position = position;
+      public Employee() {
         
         
     }

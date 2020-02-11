@@ -11,8 +11,8 @@ package Employees;
  */
 public class Manager extends Employee {
 
-    public Manager(String id, String name,String lastName, int salary, genders gender, String birthDate, int startDate, positions position) {
-        super(id, name,lastName, salary, gender, birthDate, startDate, position);
+    public Manager() {
+       
     }
     
     
