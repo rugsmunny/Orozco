@@ -50,8 +50,11 @@ public class Menus {
 
             try {
                 choice = Integer.parseInt(input.nextLine());
-                if (choice == 0 || choice <= choices.length) {
+                if(choice == 0 && back == true){
                     return choice;
+                }
+                if (choice <= choices.length) {
+                    
                 }
             } catch (NumberFormatException e) {
                 System.out.println("\nError. Please try again.");
@@ -160,8 +163,8 @@ public class Menus {
 
     }
 
-    public static Employee chooseDepartment(Employee employee, Scanner input) {
-        employee = null;
+    public static Employee chooseDepartment(Employee e, Scanner input) {
+        Employee employee = null;
         switch (choiceMethod(Orozco.departments, input, false)) {
             case 1:
 
@@ -200,7 +203,14 @@ public class Menus {
                 System.out.println("Receptionist account added");
                 break;
         }
-        return employee;
+        if (e == null) {
+            return employee;
+        } else {
+            employee.setValues(e.name, e.lastName, e.salary, e.id, e.startDate, e.birthDate, e.position, e.gender);
+            
+            return employee;
+        }
+
     }
 
     public static void choosePosition(Employee employee, Scanner input) {

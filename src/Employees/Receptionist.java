@@ -17,5 +17,9 @@ public class Receptionist extends Employee implements AnnualBonusChart{
         
     }
 
-    
+      @Override
+    public String getInfo(){
+        return String.format("\nId: %s\n Name: %s\n Last Name: %s\n Salary: %d - Bonus: %.2f\n Date of birth: %s\n Gender: %s\n Department: %s\n Position: %s\n Start date: %d\n",id,name,lastName,salary,bonus,birthDate,gender,getClass().getName(),position,startDate);
+    }
+
 }

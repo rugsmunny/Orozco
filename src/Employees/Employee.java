@@ -9,20 +9,38 @@ package Employees;
  *
  * @author karim
  */
-
-
 public abstract class Employee {
+
     public String name;
     public String lastName;
     public int salary;
     public double bonus;
     public String department;
-    
+    public String id;
+    public int startDate;
+    public String birthDate;
+    public positions position;
+    public genders gender;
 
-  
-            
-            
-            
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public void setValues(String Name, String LastName, int Salary, String Id, int StartDate, String BirthDate, positions Position, genders Gender) {
+
+        this.name = Name;
+        this.lastName = LastName;
+        this.salary = Salary;
+        this.id = Id;
+        this.startDate = StartDate;
+        this.birthDate = BirthDate;
+        this.position = Position;
+        this.gender = Gender;
+    }
 
     public double getBonus() {
         return bonus;
@@ -31,13 +49,6 @@ public abstract class Employee {
     public void setBonus(double bonus) {
         this.bonus = bonus;
     }
-     
-    public genders gender; 
-
-    public String id;
-    public int startDate;
-    public String birthDate;
-    public positions position;
 
     public String getLastName() {
         return lastName;
@@ -47,7 +58,6 @@ public abstract class Employee {
         this.lastName = lastName;
     }
 
-    
     public String getId() {
         return id;
     }
@@ -64,18 +74,18 @@ public abstract class Employee {
         this.birthDate = birthDate;
     }
 
-    
-    public enum genders{
-        man,woman,nonbinary
+    public enum genders {
+
+        man, woman, nonbinary
     }
-    public enum positions{
+
+    public enum positions {
+
         worker, localManager
     }
-   
-    
 
-    public String getInfo(){
-        return String.format("\nId: %s\n Name: %s\n Last Name: %s\n Salary: %d\n Date of birth: %s\n Gender: %s\n Department: %s\n Position: %s\n Start date: %d\n",id,name,lastName,salary,birthDate,department, gender,position,startDate);
+    public String getInfo() {
+        return String.format("\nId: %s\n Name: %s\n Last Name: %s\n Salary: %d\n Date of birth: %s\n Gender: %s\n Department: %s\n Position: %s\n Start date: %d\n", id, name, lastName, salary, birthDate, gender, getClass().getName(), position, startDate);
     }
 
     public int getStartDate() {
@@ -85,7 +95,7 @@ public abstract class Employee {
     public void setStartDate(int startDate) {
         this.startDate = startDate;
     }
-    
+
     public positions getPosition() {
         return position;
     }
@@ -93,7 +103,7 @@ public abstract class Employee {
     public void setPosition(positions position) {
         this.position = position;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -118,12 +128,8 @@ public abstract class Employee {
         this.gender = gender;
     }
 
-      public Employee() {
-        
-        
+    public Employee() {
+
     }
-    
-    
-   
-    
+
 }
