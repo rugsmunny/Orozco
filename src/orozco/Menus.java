@@ -160,8 +160,8 @@ public class Menus {
 
     }
 
-    public static Employee chooseDepartment(Employee employee, Scanner input) {
-        employee = null;
+    public static Employee chooseDepartment(Employee e, Scanner input) {
+        Employee employee = null;
         switch (choiceMethod(Orozco.departments, input, false)) {
             case 1:
 

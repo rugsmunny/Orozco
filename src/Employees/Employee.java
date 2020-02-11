@@ -75,7 +75,7 @@ public abstract class Employee {
     
 
     public String getInfo(){
-        return String.format("\nId: %s\n Name: %s\n Last Name: %s\n Salary: %d\n Date of birth: %s\n Gender: %s\n Department: %s\n Position: %s\n Start date: %d\n",id,name,lastName,salary,birthDate,department, gender,position,startDate);
+        return String.format("\nId: %s\n Name: %s\n Last Name: %s\n Salary: %d\n Date of birth: %s\n Gender: %s\n Department: %s\n Position: %s\n Start date: %d\n",id,name,lastName,salary,birthDate, gender,getClass().getName(),position,startDate);
     }
 
     public int getStartDate() {
