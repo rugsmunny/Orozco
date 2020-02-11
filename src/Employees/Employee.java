@@ -15,6 +15,22 @@ public abstract class Employee {
     public String name;
     public String lastName;
     public int salary;
+    public double bonus;
+    public String department;
+    
+
+  
+            
+            
+            
+
+    public double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
+    }
      
     public genders gender; 
 
@@ -59,7 +75,7 @@ public abstract class Employee {
     
 
     public String getInfo(){
-        return String.format("\nId: %s\n Name: %s\n Last Name: %s\n Salary: %d\n Date of birth: %s\n Gender: %s\n Position: %s\n Start date: %d\n",id,name,lastName, salary,birthDate,gender,position,startDate);
+        return String.format("\nId: %s\n Name: %s\n Last Name: %s\n Salary: %d\n Date of birth: %s\n Gender: %s\n Department: %s\n Position: %s\n Start date: %d\n",id,name,lastName,salary,birthDate,department, gender,position,startDate);
     }
 
     public int getStartDate() {

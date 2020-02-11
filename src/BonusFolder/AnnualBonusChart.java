@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Employees;
+package BonusFolder;
 
 /**
  *
  * @author karim
  */
-public class Bonus {
+public interface AnnualBonusChart {
     
+  final double annualBonus = 0.35;
+  
 }
+
+

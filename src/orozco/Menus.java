@@ -97,7 +97,7 @@ public class Menus {
         while (true) {
 
             for (Employee e : Orozco.employees) {
-                System.out.println(id + " " + e.id);
+
                 if (e.id.equals(tempid)) {
 
                     tempid = id;
@@ -114,7 +114,7 @@ public class Menus {
     public static void chooseName(Employee employee, Scanner input) {
         String name;
         while (true) {
-            clearScreen();
+
             name = questionAndInputString("Name", input);
             if (name.length() < 2) {
                 continue;
@@ -131,7 +131,7 @@ public class Menus {
     public static void chooseLastName(Employee employee, Scanner input) {
         String lastName;
         while (true) {
-            clearScreen();
+
             lastName = questionAndInputString("Last Name", input);
             if (lastName.length() < 2) {
                 continue;
@@ -160,6 +160,49 @@ public class Menus {
 
     }
 
+    public static Employee chooseDepartment(Employee employee, Scanner input) {
+        employee = null;
+        switch (choiceMethod(Orozco.departments, input, false)) {
+            case 1:
+
+                employee = new Programmer();
+
+                System.out.println("Programmer account added");
+
+                break;
+            case 2:
+
+                employee = new Accountant();
+                System.out.println("Accountant account added");
+                break;
+
+            case 3:
+
+                employee = new Economy();
+                System.out.println("Economy account added");
+                break;
+
+            case 4:
+
+                employee = new NetworkTechnician();
+                System.out.println("NetworkTechnician account added");
+                break;
+
+            case 5:
+
+                employee = new Manager();
+                System.out.println("Manager account added");
+                break;
+
+            case 6:
+
+                employee = new Receptionist();
+                System.out.println("Receptionist account added");
+                break;
+        }
+        return employee;
+    }
+
     public static void choosePosition(Employee employee, Scanner input) {
         switch (choiceMethod(new String[]{"Worker", "Local manager"}, input, false)) {
             case 1:
@@ -173,45 +216,7 @@ public class Menus {
 
     public static void addEmployee(Scanner input) {
         Employee employee = null;
-        switch (choiceMethod(Orozco.departments, input, false)) {
-            case 1:
-                clearScreen();
-                employee = new Programmer();
-
-                System.out.println("Programmer account added");
-
-                break;
-            case 2:
-                clearScreen();
-                employee = new Accountant();
-                System.out.println("Accountant account added");
-                break;
-
-            case 3:
-                clearScreen();
-                employee = new Economy();
-                System.out.println("Economy account added");
-                break;
-
-            case 4:
-                clearScreen();
-                employee = new NetworkTechnician();
-                System.out.println("NetworkTechnician account added");
-                break;
-
-            case 5:
-                clearScreen();
-                employee = new Manager();
-                System.out.println("Manager account added");
-                break;
-
-            case 6:
-                clearScreen();
-                employee = new Receptionist();
-                System.out.println("Receptionist account added");
-                break;
-        }
-
+        employee = chooseDepartment(employee, input);
         chooseName(employee, input);
         chooseLastName(employee, input);
         chooseGender(employee, input);
@@ -230,18 +235,16 @@ public class Menus {
         boolean looping = true;
         while (looping) {
 
-            clearScreen();
-
             switch (choiceMethod(new String[]{"Get all info", "Change Info", "Delete"}, input, true)) {
                 case 1:
-                    clearScreen();
+
                     System.out.println(e.getInfo());
                     break;
                 case 2:
-                    clearScreen();
+
                     boolean changing = true;
                     while (changing) {
-                        switch (choiceMethod(new String[]{"Name", "Last Name", "Gender", "Salary", "Birthdate", "Startdate", "Position"}, input, true)) {
+                        switch (choiceMethod(new String[]{"Name", "Last Name", "Gender", "Salary", "Department", "Position", "Birthdate", "Startdate"}, input, true)) {
                             case 1:
                                 chooseName(e, input);
                                 break;
@@ -251,31 +254,38 @@ public class Menus {
 
                             case 3:
                                 chooseGender(e, input);
+                                break;
 
                             case 4:
                                 e.setSalary(questionAndInputInt("Salary", input));
                                 break;
 
                             case 5:
-                                choosePosition(e, input);
+                                e = chooseDepartment(e, input);
+                                break;
 
                             case 6:
-                                e.setBirthDate(questionAndInputString("Birth date (YYYYMMDD)", input));
+                                choosePosition(e, input);
                                 break;
 
                             case 7:
+                                e.setBirthDate(questionAndInputString("Birth date (YYYYMMDD)", input));
+                                break;
+
+                            case 8:
                                 e.setStartDate(questionAndInputInt("\nStart date (YYYYMMDD)", input));
                                 break;
 
                             case 0:
                                 changing = false;
+                                break;
 
                         }
                     }
 
                     break;
                 case 3:
-                    clearScreen();
+
                     System.out.println("Are you sure you want to delete this employee?");
                     if (choiceMethod(new String[]{"Yes", "No"}, input, false) == 1) {
 
@@ -293,73 +303,78 @@ public class Menus {
 
     public static void selectEmployee(Scanner input) {
         boolean selectingEmployee = true;
-        while (selectingEmployee == true) {
-            clearScreen();
-            String employee;
-            int index = 1;
-            for (Employee e : Orozco.employees) {
-                System.out.print(String.format("\n%d. %s", index, e.name));
-                index++;
+        if (!Orozco.employees.isEmpty()) {
+            while (selectingEmployee == true) {
 
-            }
-            System.out.println("\n0. Back");
-            Employee selectedEmployee = null;
-            if (!Orozco.employees.isEmpty()) {
-                
-                String id = questionAndInputString("\nType id or name", input);
-                if (id.equals("0")){
-                    selectingEmployee = false;
+                String employee;
+                int index = 1;
+                for (Employee e : Orozco.employees) {
+                    System.out.print(String.format("\n%d. %s", index, e.name));
+                    index++;
+
                 }
-                try {
-                    
-                    selectedEmployee = Orozco.employees.get(Integer.parseInt(id) - 1);
-                } catch (Exception ex) {
-                    for (Employee e : Orozco.employees) {
-                        if (id.equals(e.id)) {
-                            selectedEmployee = e;
-                            break;
+                System.out.println("\n0. Back");
+                Employee selectedEmployee = null;
+                {
+
+                    String id = questionAndInputString("\nType id or name", input);
+                    if (id.equals("0")) {
+                        selectingEmployee = false;
+                    }
+                    try {
+
+                        selectedEmployee = Orozco.employees.get(Integer.parseInt(id) - 1);
+                    } catch (Exception ex) {
+                        for (Employee e : Orozco.employees) {
+                            if (id.equals(e.id)) {
+                                selectedEmployee = e;
+                                break;
+                            }
                         }
                     }
+                    if (selectedEmployee != null) {
+                        employeeOptions(selectedEmployee, input);
+                    }
                 }
-                if (selectedEmployee != null) {
-                    employeeOptions(selectedEmployee, input);
-                }
-            } else {
-                System.out.println("No employees exist");
+
             }
 
-        }
+        } else {
+            System.out.println("No employees exist");
 
+        }
     }
 
+    public static void statistics(Scanner input) {
 
+        if (!Orozco.employees.isEmpty()) {
+            boolean looping = true;
+            while (looping == true) {
+                switch (Menus.choiceMethod(new String[]{"Gender", "Wages"}, input, true)) {
 
-public static void statistics(Scanner input) {
-        clearScreen();
-        boolean looping = true;
-        while (looping == true) {
-            switch (Menus.choiceMethod(new String[]{"Gender", "Wages"}, input, true)) {
+                    case 1:
 
-                case 1:
-                    clearScreen();
-                    //getGenderCount(Menus.choiceMethod(new String[]{"Men", "Women", "Non Binary"}, input, true));
-                    getGenderCount();
+                        //getGenderCount(Menus.choiceMethod(new String[]{"Men", "Women", "Non Binary"}, input, true));
+                        getGenderCount();
 
-                    break;
-                case 2:
-                    clearScreen();
-                    getSalary(Menus.choiceMethod(new String[]{"Highest salary", "Lowest salary", "Average salary"}, input, true));
-                    break;
-                case 0:
-                    looping = false;
+                        break;
+                    case 2:
+
+                        getSalary(Menus.choiceMethod(new String[]{"Highest salary", "Lowest salary", "Average salary"}, input, true));
+                        break;
+                    case 0:
+                        looping = false;
+                }
             }
+
+        } else {
+            System.out.println("No employees exists.");
         }
-
     }
-
 //    public static int getGenderStats(){
 //        Orozco.employees.stream().collect(Collector.)
 //    }
+
     public static void getGenderCount() {
 
         Employee.genders gender = null;
@@ -402,7 +417,7 @@ public static void statistics(Scanner input) {
                     }
 
                 }
-                clearScreen();
+
                 System.out.println("Highest company salary is " + salary);
                 break;
             case 2:
@@ -412,7 +427,7 @@ public static void statistics(Scanner input) {
                     }
 
                 }
-                clearScreen();
+
                 System.out.println("Lowest company salary is " + salary);
                 break;
             case 3:
@@ -421,14 +436,10 @@ public static void statistics(Scanner input) {
                     salary += e.salary;
 
                 }
-                clearScreen();
+
                 System.out.println("Average company salary is " + (salary / Orozco.employees.size()));
                 break;
         }
     }
 
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
 }

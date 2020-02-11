@@ -3,19 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Employees;
-
-import BonusFolder.AnnualBonusChart;
+package BonusFolder;
 
 /**
  *
- * @author admusr
+ * @author karim
  */
-public class Receptionist extends Employee implements AnnualBonusChart{
-
-    public Receptionist() {
-        
-    }
-
+public interface WorkingHolidayBonus {
+    
+    
+   double workingHolidayBonus = 0.85;
     
 }

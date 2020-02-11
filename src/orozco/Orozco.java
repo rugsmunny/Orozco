@@ -37,20 +37,20 @@ public class Orozco {
             switch (Menus.choiceMethod(new String[] {"Add employee", "Select employee", "Statistics"}, input, true)) {
 
                 case 1:
-                    Menus.clearScreen();
+                    
                     Menus.addEmployee(input);
                     break;
                 case 2:
-                   Menus.clearScreen();
+                   
                     Menus.selectEmployee(input);
                     break;
                 case 3:
-                    Menus.clearScreen();
+                    
                     Menus.statistics(input);
                     
                     break;
                 case 0:
-                    Menus.clearScreen();
+                    
                     System.out.println("\nProgram shut down.");
                     running = false;
                     break;
