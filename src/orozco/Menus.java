@@ -6,9 +6,8 @@
 package orozco;
 
 import Employees.*;
-import java.util.Calendar;
 import java.util.Scanner;
-import java.util.function.Consumer;
+
 
 /**
  *
@@ -324,7 +323,7 @@ public class Menus {
                 String employee;
                 int index = 1;
                 for (Employee e : Orozco.employees) {
-                    System.out.print(String.format("\n%d. %s", index, e.name));
+                    System.out.print(String.format("\n%d. %s", index, e.id));
                     index++;
 
                 }
